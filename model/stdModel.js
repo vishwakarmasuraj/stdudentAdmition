@@ -25,6 +25,10 @@ const stdSchema = new Schema({
         type: String,
         enum: ['CSE', 'IT', 'ME', 'CE', 'EC']
     },
+    mobile: {
+        type: String,
+        required: true
+    },
     dateOfJoining: {
         type: Date,
         required: true

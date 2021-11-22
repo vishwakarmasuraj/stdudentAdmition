@@ -23,6 +23,7 @@ const studentValidateRule = () => {
             }),
         body('password').notEmpty().isLength({ min: 6 }),
         body('branch').notEmpty(),
+        body('mobile').notEmpty().isLength({ min: 10, max: 10 }),
         body('dateOfJoining').notEmpty(),
         body('dateOfComplete').notEmpty(),
         body('status').notEmpty()

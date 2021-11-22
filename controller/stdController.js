@@ -18,4 +18,33 @@ const addStudent = async (req, res) => {
     }
 };
 
-module.exports = { addStudent }
+const getStudent = async (req, res) => {
+    try {
+        const result = await studentModel.find({})
+        successHandler(res, constants.GET_MSG, result)
+    } catch (error) {
+        return errorHandler(res, constants.ERR_MSG)
+    }
+}
+
+const studentUpdate = async (req, res) => {
+    try {
+        const id = req.params.id
+        const stdUpdate = await studentModel.findByIdAndUpdate({ _id: id }, { $set: req.body })
+        successHandler(res, constants.UPDATE_MSG, stdUpdate)
+    } catch (error) {
+        return errorHandler(res, constants.ERR_MSG)
+    }
+}
+
+const delStudent = async (req, res) => {
+    try {
+        const id = req.params.id
+        await studentModel.findOneAndRemove({ _id: id })
+        successHandler(res, constants.DEL_MSG)
+    } catch (error) {
+        return errorHandler(res, constants.ERR_MSG)
+    }
+}
+
+module.exports = { addStudent, getStudent, studentUpdate, delStudent }
