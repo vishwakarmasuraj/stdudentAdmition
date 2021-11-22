@@ -31,6 +31,7 @@ const stdSchema = new Schema({
     },
     dateOfComplete: {
         type: Date,
+
         required: true
     },
     status: {
