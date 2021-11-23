@@ -35,9 +35,20 @@ const studentSearchByRecord = async (req, res) => {
                 { $or: [{ name: { $regex: `${ search }`, $options: 'i' } }] },
                 { $or: [{ lastName: { $regex: `${ search }`, $options: 'i' } }] },
                 { $or: [{ email: search }] },
-                { $or: [{ branch: search }] }
+                { $or: [{ branch: search }] },
+                { $or: [{ status: search }] }
             ]
         }).select('-password')
+        successHandler(res, constants.GET_MSG, result)
+    } catch (error) {
+        return errorHandler(res, constants.ERR_MSG)
+    }
+}
+
+const studentRecord = async (req, res) => {
+    try {
+        const { status = '' } = req.query
+        const result = await studentModel.find({ status: status });
         successHandler(res, constants.GET_MSG, result)
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
@@ -64,4 +75,4 @@ const delStudent = async (req, res) => {
     }
 }
 
-module.exports = { addStudent, getStudent, studentUpdate, delStudent, studentSearchByRecord }
+module.exports = { addStudent, getStudent, studentUpdate, delStudent, studentSearchByRecord, studentRecord }
