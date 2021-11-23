@@ -35,7 +35,7 @@ const getStudent = async (req, res) => {
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
     }
-}
+};
 
 /**
  * 
@@ -60,7 +60,7 @@ const studentSearchByRecord = async (req, res) => {
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
     }
-}
+};
 
 /**
  * 
@@ -71,13 +71,16 @@ const studentSearchByRecord = async (req, res) => {
 
 const studentRecord = async (req, res) => {
     try {
-        const { status = '' } = req.query
-        const result = await studentModel.find({ status: status });
+        let { startDate, endDate } = req.query
+        if (!startDate || !endDate) {
+            res.status(400).json({ message: 'please ensure have mention required field' })
+        }
+        const result = await studentModel.find({ dateOfJoining: { $gte: new Date(startDate).setHours(00, 00, 00), $lt: new Date(endDate).setHours(23, 59, 59) } }).sort({ dateOfJoining: 'asc' });
         successHandler(res, constants.GET_MSG, result)
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
     }
-}
+};
 
 /**
  * 
@@ -94,7 +97,7 @@ const studentUpdate = async (req, res) => {
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
     }
-}
+};
 
 /**
  * 
@@ -111,6 +114,6 @@ const delStudent = async (req, res) => {
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
     }
-}
+};
 
 module.exports = { addStudent, getStudent, studentUpdate, delStudent, studentSearchByRecord, studentRecord }
