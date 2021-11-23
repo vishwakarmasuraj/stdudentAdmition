@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 
 const addStudent = async (req, res) => {
     try {
-        req.body.password = await bcrypt.hash(req.body.password, constants.ROUND)
+        req.body.password = await bcrypt.hashSync(req.body.password, constants.ROUND)
         const student = await new studentModel(req.body)
         await student.save()
         successHandler(res, constants.CREATE_MSG)
@@ -20,10 +20,18 @@ const addStudent = async (req, res) => {
 
 const getStudent = async (req, res) => {
     try {
-        const result = await studentModel.find({})
+        const result = await studentModel.find({}).select('-password')
         successHandler(res, constants.GET_MSG, result)
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
+    }
+}
+
+const studentSearchByRecord = async (req, res) => {
+    try {
+
+    } catch (error) {
+
     }
 }
 
