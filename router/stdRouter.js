@@ -8,6 +8,8 @@ router.post('/create-student', stdValidRule.studentValidateRule(), valid.validat
 
 router.get('/get-student', stdController.getStudent);
 
+router.get('/search', stdController.studentSearchByRecord)
+
 router.put('/update-student/:id', stdController.studentUpdate)
 
 router.delete('/delete-student/:id', stdController.delStudent)
