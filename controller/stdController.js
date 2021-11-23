@@ -73,7 +73,7 @@ const studentRecord = async (req, res) => {
     try {
         let { startDate, endDate } = req.query
         if (!startDate || !endDate) {
-            res.status(400).json({ message: 'please ensure have mention required field' })
+            res.status(400).json({ message: 'please ensure, you have mentioned required field' })
         }
         const result = await studentModel.find({ dateOfJoining: { $gte: new Date(startDate).setHours(00, 00, 00), $lt: new Date(endDate).setHours(23, 59, 59) } }).sort({ dateOfJoining: 'asc' }).select('-password');
         successHandler(res, constants.GET_MSG, result)
