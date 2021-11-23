@@ -1,6 +1,11 @@
 const { studentModel } = require('../model');
 const { body } = require('express-validator');
 
+/**
+ * 
+ * @returns 
+ */
+
 const studentValidateRule = () => {
     return [
         body('title').notEmpty(),

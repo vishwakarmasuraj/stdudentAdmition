@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 
 /**
  * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
  */
 
 const addStudent = async (req, res) => {
@@ -18,6 +21,13 @@ const addStudent = async (req, res) => {
     }
 };
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+
 const getStudent = async (req, res) => {
     try {
         const result = await studentModel.find({}).select('-password')
@@ -26,6 +36,13 @@ const getStudent = async (req, res) => {
         return errorHandler(res, constants.ERR_MSG)
     }
 }
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 
 const studentSearchByRecord = async (req, res) => {
     try {
@@ -45,6 +62,13 @@ const studentSearchByRecord = async (req, res) => {
     }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+
 const studentRecord = async (req, res) => {
     try {
         const { status = '' } = req.query
@@ -55,6 +79,13 @@ const studentRecord = async (req, res) => {
     }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+
 const studentUpdate = async (req, res) => {
     try {
         const id = req.params.id
@@ -64,6 +95,13 @@ const studentUpdate = async (req, res) => {
         return errorHandler(res, constants.ERR_MSG)
     }
 }
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 
 const delStudent = async (req, res) => {
     try {

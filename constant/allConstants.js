@@ -1,3 +1,6 @@
+/**
+ * exports all constants message via module.exports
+ */
 module.exports = Object.freeze({
     ROUND: 10,
     CREATE_MSG: 'Successfully created',

@@ -1,5 +1,8 @@
 const { Schema, model } = require('mongoose');
 
+/**
+ * student model Schema 
+ */
 const stdSchema = new Schema({
     title: {
         type: String,
