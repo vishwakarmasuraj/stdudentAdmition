@@ -75,7 +75,7 @@ const studentRecord = async (req, res) => {
         if (!startDate || !endDate) {
             res.status(400).json({ message: 'please ensure have mention required field' })
         }
-        const result = await studentModel.find({ dateOfJoining: { $gte: new Date(startDate).setHours(00, 00, 00), $lt: new Date(endDate).setHours(23, 59, 59) } }).sort({ dateOfJoining: 'asc' });
+        const result = await studentModel.find({ dateOfJoining: { $gte: new Date(startDate).setHours(00, 00, 00), $lt: new Date(endDate).setHours(23, 59, 59) } }).sort({ dateOfJoining: 'asc' }).select('-password');
         successHandler(res, constants.GET_MSG, result)
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
