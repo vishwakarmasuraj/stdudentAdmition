@@ -109,8 +109,8 @@ const studentUpdate = async (req, res) => {
 const delStudent = async (req, res) => {
     try {
         const id = req.params.id
-        await studentModel.findOneAndRemove({ _id: id })
-        successHandler(res, constants.DEL_MSG)
+        const result = await studentModel.findOneAndRemove({ _id: id })
+        successHandler(res, constants.DEL_MSG, result)
     } catch (error) {
         return errorHandler(res, constants.ERR_MSG)
     }

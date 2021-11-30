@@ -8,7 +8,7 @@ const { body } = require('express-validator');
 
 const studentValidateRule = () => {
     return [
-        body('title').notEmpty(),
+        body('title').notEmpty().isAlpha().withMessage('Title should be alphabetical'),
         body('name').notEmpty()
             .custom(value => {
                 return studentModel.findOne({ name: value }).then(user => {
@@ -25,13 +25,13 @@ const studentValidateRule = () => {
                         return Promise.reject('email is already exist')
                     }
                 })
-            }),
+            }).isEmail().withMessage('email should be email type'),
         body('password').notEmpty().isLength({ min: 6 }),
         body('branch').notEmpty(),
         body('mobile').notEmpty().isLength({ min: 10, max: 10 }),
         body('dateOfJoining').notEmpty(),
         body('dateOfComplete').notEmpty(),
-        body('status').notEmpty()
+        body('status').notEmpty().withMessage('please enter status')
     ]
 }
 
