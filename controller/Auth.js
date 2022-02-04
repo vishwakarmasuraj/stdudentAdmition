@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const addStudent = async (req, res) => {
-    try {
+    try { 
         req.body.password = await bcrypt.hashSync(req.body.password, allConstants.ROUND)
         const student = await new studentModel(req.body);
         await student.save();
@@ -35,7 +35,7 @@ const userLogin = async (req, res) => {
         if (!email || !password) {
             return errorHandler(res, 400, allConstants.NOT_ENTER_EMAIL_PASS)
         }
-        let data = await studentModel.findOne({email: email});
+        const data = await studentModel.findOne({email: email});
         if (!data){
             return errorHandler(res, 400, allConstants.EMAIL_NOT_FOUND);
         };
@@ -53,7 +53,34 @@ const userLogin = async (req, res) => {
     };
 };
 
+const adminLogin = async (req, res) => {
+    try {
+        const {email, password} = req.body
+        if (!email || !password){
+            return errorHandler(res, 400, allConstants.NOT_ENTER_EMAIL_PASS)
+        } 
+        let data;
+        data = await studentModel.findOne({email: email, userType: 'admin'});
+        if (!data) {
+            return errorHandler(res, 400, allConstants.EMAIL_NOT_FOUND)
+        }
+        const checkPassword = await bcrypt.compare(password, data.password);
+        if (!checkPassword){
+            return errorHandler(res, 400, allConstants.WRONG_PASSWORD);
+        }else{
+            return successHandler(res, 200, allConstants.ADMIN_LOGIN_SUCCESS, {
+                token: generateToken(data),
+                data
+            });
+        };
+    } catch (error) {
+        console.log(error)
+        return errorHandler(res, 500, allConstants.ERR_MSG);
+    };
+};
+
 module.exports = {
     addStudent,
-    userLogin
+    userLogin,
+    adminLogin
 }

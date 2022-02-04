@@ -22,9 +22,10 @@ const studentValidateRule = () => {
         body('password').notEmpty().isLength({ min: 8 }),
         body('branch').notEmpty(),
         body('mobile').notEmpty().isLength({ min: 10, max: 10 }),
-        body('dateOfJoining').notEmpty(),
-        body('dateOfComplete').notEmpty(),
-        body('status').notEmpty()
+        body('dateOfJoining'),
+        body('dateOfComplete'),
+        body('userType'),
+        body('status')
     ]
 }
 

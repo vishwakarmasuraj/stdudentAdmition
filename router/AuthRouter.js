@@ -17,5 +17,9 @@ router.post('/create-student', stdValidRule.studentValidateRule(), valid.validat
  */
 router.post('/login', authController.userLogin)
 
+/****Admin login ****/
+
+router.post('/admin/login', authController.adminLogin)
+
 
 module.exports = router

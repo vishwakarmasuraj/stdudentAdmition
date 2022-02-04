@@ -40,11 +40,14 @@ const stdSchema = new Schema({
     dateOfComplete: {
         type: Date,
         required: true
-
+    },
+    userType: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
     },
     status: {
         type: String,
-        required: true,
         enum: ['active', 'inactive']
     }
 }, { timestamps: true })
