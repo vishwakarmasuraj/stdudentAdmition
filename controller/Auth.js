@@ -79,8 +79,14 @@ const adminLogin = async (req, res) => {
     };
 };
 
+const profile = async (req, res) => {
+    console.log('done profile')
+    return res.status(200).json(req.user)
+}
+
 module.exports = {
     addStudent,
     userLogin,
-    adminLogin
+    adminLogin,
+    profile
 }

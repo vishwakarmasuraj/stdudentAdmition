@@ -20,6 +20,10 @@ router.post('/login', authController.userLogin)
 /****Admin login ****/
 
 router.post('/admin/login', authController.adminLogin)
+/**
+ * 
+ */
+router.get('/admin/me', authController.profile)
 
 
 module.exports = router
