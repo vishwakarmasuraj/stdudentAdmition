@@ -34,12 +34,13 @@ const stdSchema = new Schema({
     },
     dateOfJoining: {
         type: Date,
+        default: Date.now,
         required: true
     },
     dateOfComplete: {
         type: Date,
-
         required: true
+
     },
     status: {
         type: String,

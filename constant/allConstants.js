@@ -1,7 +1,7 @@
 /**
  * exports all constants message via module.exports
  */
-module.exports = Object.freeze({
+const allConstants = Object.freeze({
     ROUND: 10,
     CREATE_MSG: 'Successfully created',
     GET_MSG: 'Found students record',
@@ -15,3 +15,4 @@ module.exports = Object.freeze({
     LOGIN_SUCCESS: 'Logged in successfully, Redirect to dashboard'
 });
 
+module.exports = allConstants

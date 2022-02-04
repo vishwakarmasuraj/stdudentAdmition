@@ -4,17 +4,8 @@ const router = express.Router();
 /**
  * 
  */
-const { stdValidRule, valid } = require('../middleware');
 const { stdController } = require('../controller');
-/**
- * 
- */
-router.post('/create-student', stdValidRule.studentValidateRule(), valid.validate, stdController.addStudent);
 
-/**
- * 
- */
-router.post('/login', stdController.userLogin)
 /**
  * 
  */
